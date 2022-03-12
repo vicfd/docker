@@ -1,0 +1,1 @@
+docker run -it --rm --name certbot -p 80:80 -p 443:443 -v "/tmp/letsencrypt:/etc/letsencrypt" -v "/tmp/letsencrypt_lib:/var/lib/letsencrypt" certbot/certbot certonly
