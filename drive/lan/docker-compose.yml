@@ -1,0 +1,18 @@
+version: '3.5'
+
+services:
+  drive_app:
+    image: nextcloud
+    container_name: drive_app
+    restart: always
+    volumes:
+      - /root/volume/drive/app:/var/www/html
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    ports:
+      - 20001:80
+  drive_redis:
+    image: redis
+    container_name: drive_redis
+    restart: always
+    command: redis-server --requirepass <redis_pass>

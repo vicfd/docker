@@ -35,7 +35,7 @@ services:
     image: redis
     container_name: drive_redis
     restart: always
-    command: redis-server --requirepass <password>
+    command: redis-server --requirepass <redis_pass>
     networks:
       - backend
   elestilolibre_proxy:
