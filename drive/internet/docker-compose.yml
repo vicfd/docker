@@ -16,8 +16,6 @@ services:
     restart: always
     volumes:
       - /root/volume/drive/app:/var/www/html
-    extra_hosts:
-      - "host.docker.internal:host-gateway"
   drive_redis:
     image: redis
     container_name: drive_redis

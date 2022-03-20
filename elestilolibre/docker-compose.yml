@@ -16,5 +16,3 @@ services:
     restart: always
     volumes:
       - /root/volume/elestilolibre/app:/var/www/html
-    extra_hosts:
-      - "host.docker.internal:host-gateway"
