@@ -1,0 +1,26 @@
+version: "3.5"
+
+services:
+  app:
+    image: vaultwarden/server
+    container_name: bitwarden_app
+    restart: always
+    volumes:
+      - /share/docker/bitwarden/app/data:/data
+    networks:
+      - backend
+    environment:
+      WEBSOCKET_ENABLED: "true"
+      SIGNUPS_ALLOWED: "true"
+      INVITATIONS_ALLOWED: "true"
+      ADMIN_TOKEN: "79dFfXkBXSmXVV"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.bitwarden.rule=Host(`bitwarden.rimtu.com`)"
+      - "traefik.http.routers.bitwarden.entrypoints=https"
+      - "traefik.http.routers.bitwarden.tls.certresolver=letsencrypt"
+      - "traefik.http.routers.bitwarden.middlewares=bitwarden-block"
+      - "traefik.http.middlewares.bitwarden-block.plugin.plugin-blockpath.regex=^/admin(.*)"
+networks:
+  backend:
+    name: backend

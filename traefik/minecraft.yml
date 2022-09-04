@@ -1,0 +1,25 @@
+version: "3.5"
+
+services:
+  app:
+    image: itzg/minecraft-server
+    container_name: minecraft_app
+    restart: always
+    volumes:
+      - /share/docker/minecraft/app/saves-to-import:/worlds:ro
+      - /share/docker/minecraft/app/data:/data
+    networks:
+      - backend
+    environment:
+      EULA: "TRUE"
+      SERVER_NAME: "Rimtu"
+      MOTD: "Rimtu"
+      DIFFICULTY: "peaceful"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.tcp.routers.minecraft.entrypoints=minecraft"
+      - "traefik.tcp.routers.minecraft.rule=HostSNI(`*`)"
+      - "traefik.tcp.services.minecraft.loadbalancer.server.port=25565"
+networks:
+  backend:
+    name: backend

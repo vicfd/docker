@@ -1,0 +1,24 @@
+version: "3.5"
+
+services:
+  app:
+    image: hurlenko/filebrowser
+    container_name: filebrowser_app
+    restart: always
+    volumes:
+      - /share/docker/filebrowser/app/data:/data
+      - /share/docker/transmission/app/downloads/complete:/data/torrent
+      - /share/docker/filebrowser/app/config:/config
+    networks:
+      - backend
+    user: "${UID}:${GID}"
+    environment:
+      - FB_BASEURL=/
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.filebrowser.rule=Host(`upload.rimtu.com`)"
+      - "traefik.http.routers.filebrowser.entrypoints=https"
+      - "traefik.http.routers.filebrowser.tls.certresolver=letsencrypt"
+networks:
+  backend:
+    name: backend

@@ -1,0 +1,29 @@
+version: "3.5"
+
+services:
+  app:
+    image: wordpress
+    container_name: elestilolibre_app
+    restart: always
+    volumes:
+      - /share/docker/elestilolibre/app:/var/www/html
+    networks:
+      - backend
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.elestilolibre.rule=Host(`elestilolibre.com`)"
+      - "traefik.http.routers.elestilolibre.entrypoints=https"
+      - "traefik.http.routers.elestilolibre.tls=true"
+  db:
+    image: mysql
+    container_name: elestilolibre_db
+    restart: always
+    volumes:
+      - /share/docker/elestilolibre/db:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: 12345
+    networks:
+      - backend
+networks:
+  backend:
+    name: backend

@@ -1,0 +1,19 @@
+version: "3.5"
+
+services:
+  app:
+    image: strm/dnsmasq
+    container_name: dnsmasq
+    restart: always
+    volumes:
+      - /share/docker/dnsmasq/app/dnsmasq.conf:/etc/dnsmasq.conf
+    ports:
+      - "53:53/udp"
+    cap_add:
+      - NET_ADMIN
+
+# stop
+# systemctl stop systemd-resolved && systemctl disable systemd-resolved && systemctl mask systemd-resolved
+
+# start
+# systemctl start systemd-resolved && systemctl enable systemd-resolved && systemctl unmask systemd-resolved
