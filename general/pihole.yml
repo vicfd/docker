@@ -10,7 +10,7 @@ services:
       - "67:67/udp"
       - "8080:80/tcp"
     volumes:
-      - '/root/volume/pihole/etc-pihole:/etc/pihole'
-      - '/root/volume/pihole/etc-dnsmasq.d:/etc/dnsmasq.d'
+      - "/root/volume/pihole/etc-pihole:/etc/pihole"
+      - "/root/volume/pihole/etc-dnsmasq.d:/etc/dnsmasq.d"
 
 # More info at https://github.com/pi-hole/docker-pi-hole/ and https://docs.pi-hole.net/
