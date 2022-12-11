@@ -1,0 +1,21 @@
+version: '3.5'
+
+services:
+  vaultwarden:
+    image: vaultwarden/server:testing
+    container_name: vaultwarden_app
+    restart: always
+    volumes:
+      - /share/docker/vaultwarden/app/data:/data
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.vaultwarden.rule=Host(`vaultwarden.rimtu.local`)"
+      - "traefik.http.routers.vaultwarden.entrypoints=https"
+      - "traefik.http.routers.vaultwarden.tls=true"
+      - "traefik.http.routers.vaultwarden.middlewares=vaultwarden-block"
+      - "traefik.http.middlewares.vaultwarden-block.plugin.plugin-blockpath.regex=^/admin(.*)"
+    networks:
+      - backend
+networks:
+  backend:
+    name: backend

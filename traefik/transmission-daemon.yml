@@ -9,8 +9,6 @@ services:
       - /share/docker/transmission/app/data:/config
       - /share/docker/transmission/app/downloads:/downloads
       - /share/docker/transmission/app/watch:/watch
-    networks:
-      - backend
     environment:
       - PUID=1000
       - PGID=1000
@@ -25,6 +23,8 @@ services:
       - "traefik.http.routers.transmission.entrypoints=https"
       - "traefik.http.routers.transmission.tls=true"
       - "traefik.http.services.transmission.loadbalancer.server.port=9091"
+    networks:
+      - backend
 networks:
   backend:
     name: backend

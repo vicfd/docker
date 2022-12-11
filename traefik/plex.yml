@@ -1,4 +1,3 @@
-
 version: "3.5"
 
 services:
@@ -10,7 +9,6 @@ services:
       - PUID=1000
       - PGID=1000
       - VERSION=docker
-      - PLEX_CLAIM=claim-RpbKcHYd62ccH8wwzY3U
     volumes:
       - /share/docker/plex/app/library:/config
       - /share/docker/plex/app/tvseries:/tv

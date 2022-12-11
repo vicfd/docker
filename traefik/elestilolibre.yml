@@ -7,6 +7,8 @@ services:
     restart: always
     volumes:
       - /share/docker/elestilolibre/app:/var/www/html
+    ports:
+      - 20000:80
     networks:
       - backend
     labels:
@@ -19,9 +21,8 @@ services:
     container_name: elestilolibre_db
     restart: always
     volumes:
-      - /share/docker/elestilolibre/db:/var/lib/mysql
-    environment:
-      MYSQL_ROOT_PASSWORD: 12345
+      - /share/docker/elestilolibre/db/conf/my.cnf:/etc/my.cnf
+      - /share/docker/elestilolibre/db/mysql:/var/lib/mysql
     networks:
       - backend
 networks:

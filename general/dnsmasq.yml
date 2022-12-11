@@ -2,7 +2,7 @@ version: "3.5"
 
 services:
   app:
-    image: strm/dnsmasq
+    image: jasjeev4/rpi-dnsmasq
     container_name: dnsmasq
     restart: always
     volumes:
@@ -11,6 +11,11 @@ services:
       - "53:53/udp"
     cap_add:
       - NET_ADMIN
+    networks:
+      - backend
+networks:
+  backend:
+    name: backend
 
 # stop
 # systemctl stop systemd-resolved && systemctl disable systemd-resolved && systemctl mask systemd-resolved
